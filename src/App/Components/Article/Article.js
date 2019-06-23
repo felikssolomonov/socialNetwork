@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
-import {addPost, refreshText} from './../../redux/state.js';
-
+import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 
 class Article extends Component {
     render() {
+        let textMenu = this.props.textMenu;
+
         let newPostEl = React.createRef();
 
         let send = () => {
-          this.props.dispatch(addPost());
+          this.props.dispatch(addMenuItem());
         }
 
         let onChanged = () => {
@@ -22,10 +23,10 @@ class Article extends Component {
                 <div>
                     <textarea onChange={onChanged}
                               ref={newPostEl}
-                              value={this.props.newText}
+                              value={textMenu}
                               />
                 </div>
-                <p>{this.props.newText}</p>
+                <p>{textMenu}</p>
                 <div>
                     <button onClick={send}>
                         обычная функция

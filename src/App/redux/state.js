@@ -1,5 +1,4 @@
-const ADD_POST = 'ADD-POST';
-const REFRESH_TEXT = 'REFRESH-TEXT';
+import menuReducer from './reducers/menu_reducer.js';
 
 let store = {
 	_state: {
@@ -10,19 +9,21 @@ let store = {
 		    {id: 4, name: "r"},
 		    {id: 5, name: "t"},
 		],
-		newText: "newText",
-		menu: [
-		    {id: "", name: "Главная"},
-				{id: "myPage", name: "Моя Страница"},
-				{id: "Messages", name: "Сообщения"},
-				{id: "Friends", name: "Друзья"},
-				{id: "Photos", name: "Фото"},
-				{id: "Foo1", name: "MeItHe1"},
-				{id: "Foo2", name: "MeItHe2"},
-				{id: "Foo3", name: "MeItHe3"},
-				{id: "Foo4", name: "MeItHe4"},
-				{id: "Foo5", name: "MeItHe5"}
-		],
+		menu: {
+			items: [
+				{link: "", name: "Главная"},
+				{link: "myPage", name: "Моя Страница"},
+				{link: "Messages", name: "Сообщения"},
+				{link: "Friends", name: "Друзья"},
+				{link: "Photos", name: "Фото"},
+				{link: "Foo1", name: "MeItHe1"},
+				{link: "Foo2", name: "MeItHe2"},
+				{link: "Foo3", name: "MeItHe3"},
+				{link: "Foo4", name: "MeItHe4"},
+				{link: "Foo5", name: "MeItHe5"}
+			],
+			textMenu: ""
+		},
 		dialogs: [
 				{
 					name: "first",
@@ -62,64 +63,17 @@ let store = {
 			]
 		}
 	},
-	// _ret() {
-	// 	console.log("ret work");
-	// },
 	getState() {
 		return this._state;
 	},
 	subscribe(observer) {
 		this._ret = observer;
 	},
-	// addPost() {
-	// 	let newPost = {
-	// 		id: this._state.newText,
-	// 		name: this._state.newText
-	// 	};
-	// 	this._state.menu.push(newPost);
-	// 	this._state.newText = "";
-	// 	this._ret(this._state);
-	// },
-	// addNewText(message) {
-	// 	this._state.newText = message;
-	// 	this._ret(this._state);
-	// },
 	dispatch(action) {
-		if (action.type === ADD_POST) {
-			let newPost = {
-				id: this._state.newText,
-				name: this._state.newText
-			};
-			this._state.menu.push(newPost);
-			this._state.newText = "";
-			this._ret(this._state);
-		}
-		else if (action.type === REFRESH_TEXT) {
-			this._state.newText = action.message;
-			this._ret(this._state);
-		}
+		this._state.menu = menuReducer(this._state.menu, action);
+		this._ret(this._state);
 	}
 };
-
-// export let addPost = () => {
-//   return {
-//     type: ADD_POST
-//   }
-// }
-// export let refreshText = (text) => {
-//   return {
-//     type: REFRESH_TEXT,
-//     message: text
-//   }
-// }
-
-export let addPost = () => ({
-  type: ADD_POST
-});
-export let refreshText = (text) => ({
-  type: REFRESH_TEXT,
-  message: text
-});
 
 export default store;
 

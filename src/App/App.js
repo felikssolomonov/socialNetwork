@@ -14,7 +14,8 @@ import { BrowserRouter, Route, NavLink } from "react-router-dom";
 class App extends Component {
     render() {
         let data = this.props.state.data;
-        let menu = this.props.state.menu;
+        let menu = this.props.state.menu.items;
+        let textMenu = this.props.state.menu.textMenu;
         let dialogs = this.props.state.dialogs;
         let newText = this.props.state.newText;
         return (
@@ -43,7 +44,8 @@ class App extends Component {
                             }/>
                         <Route path="/Foo2" render={
                                 () => <Article  dispatch={this.props.dispatch}
-                                                newText={newText}
+                                                menu={menu}
+                                                textMenu={textMenu}
                                                 />
                             }/>
 												<Route path="/Foo3" render={
@@ -51,7 +53,8 @@ class App extends Component {
                             }/>
 												<Route path="/Foo4" render={
                                 () => <Article  dispatch={this.props.dispatch}
-                                                newText={newText}
+                                                menu={menu}
+                                                textMenu={textMenu}
                                                 />
                             }/>
 												<Route path="/Foo5" render={

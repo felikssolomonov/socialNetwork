@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 class Menu extends Component {
     render() {
-        let path = "/" + this.props.id;
+        let path = "/" + this.props.link;
         return (
             <div>
                 <Link to={path} className="menu">
