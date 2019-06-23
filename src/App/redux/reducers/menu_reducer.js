@@ -2,14 +2,17 @@ const ADD_MENU_ITEM = 'ADD-MENU-ITEM';
 const REFRESH_TEXT = 'REFRESH-TEXT';
 
 const menuReducer = (state, action) => {
-	if (action.type === ADD_MENU_ITEM) {
-		state.items.push({link: state.textMenu+"link", name: state.textMenu},);
-		state.textMenu = "";
+	switch (action.type) {
+		case ADD_MENU_ITEM:
+			state.items.push({link: state.textMenu+"link", name: state.textMenu},);
+			state.textMenu = "";
+			return state;
+		case REFRESH_TEXT:
+			state.textMenu = action.textMenu;
+			return state;
+		default:
+			return state;
 	}
-	else if (action.type === REFRESH_TEXT) {
-		state.textMenu = action.textMenu;
-	}
-	return state;
 }
 
 export let addMenuItem = () => ({
