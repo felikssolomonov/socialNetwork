@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-// import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 
 class Article extends Component {
     render() {
-      // debugger;
         let textMenu = this.props.textMenu;
         let newPostEl = React.createRef();
         let send = () => {

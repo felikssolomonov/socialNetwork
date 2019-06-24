@@ -4,8 +4,6 @@ import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 
 class ArticleComponent extends Component {
     render() {
-			// debugger;
-        // let textMenu = this.props.textMenu;
         let send = () => {
           this.props.dispatch(addMenuItem());
         }
