@@ -2,13 +2,6 @@ import menuReducer from './reducers/menu_reducer.js';
 
 let store = {
 	_state: {
-		data: [
-		    {id: 1, name: "q"},
-		    {id: 2, name: "w"},
-		    {id: 3, name: "e"},
-		    {id: 4, name: "r"},
-		    {id: 5, name: "t"},
-		],
 		menu: {
 			items: [
 				{link: "", name: "Главная"},
@@ -28,40 +21,31 @@ let store = {
 				{
 					name: "first",
 					data: [
-							{id: "1"},
-							{id: "2"},
-							{id: "3"},
+							{message: "1"},
+							{message: "2"},
+							{message: "3"},
 							{id: "4"}
 					],
 				},
 				{
 					name: "second",
 					data: [
-							{id: "111"},
-							{id: "222"},
-							{id: "333"},
-							{id: "444"}
+							{message: "111"},
+							{message: "222"},
+							{message: "333"},
+							{message: "444"}
+					],
+				},
+				{
+					name: "three",
+					data: [
+							{message: "11111"},
+							{message: "22222"},
+							{message: "333333"},
+							{message: "444444"}
 					],
 				}
-		],
-		profile: {
-			data1: [
-					{id: 1, name: "q"},
-					{id: 2, name: "w"},
-					{id: 3, name: "e"},
-					{id: 4, name: "r"},
-					{id: 5, name: "t"},
-					{id: 55, name: "t55"}
-			],
-			data2: [
-					{id: 1, name: "q"},
-					{id: 2, name: "w"},
-					{id: 3, name: "e"},
-					{id: 4, name: "r"},
-					{id: 5, name: "t"},
-					{id: 55, name: "t55"}
-			]
-		}
+		]
 	},
 	getState() {
 		return this._state;

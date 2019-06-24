@@ -4,9 +4,13 @@ class Dialog extends Component {
     render() {
         let www = this.props.mess.map( item =>
           <p>
-              {item.id}
+              {item.message}
           </p>
         );
+        // let send = () => {
+        //   www = this.props.mess.name;
+        // }
+        // let www = '';
         return (
             <div className="article">
                 {www}

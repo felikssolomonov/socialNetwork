@@ -3,19 +3,30 @@ import Dialog from './../Dialogs/Dialog/Dialog.js';
 
 class Dialogs extends Component {
     render() {
+        let dialogs = this.props.dialogs;
+        let messages = "";
         let send = () => {
-          this.props.dispatch({type: 'ADD-POST'});
+          let index = event.srcElement.id;
+          // let d = dia
+          //               // .filter(card => card.name === "three")
+          //               .map(item => {
+          //                 <p>{item.name}</p>
+          //               });
+          messages = dialogs[index].data.map( item =>
+              item.message
+          );
+          alert(messages);
         }
-        let www = this.props.dialogs.map( item =>
-            <div className="article">
-                <button onClick={send}>
-                    {item.name}
-                </button>
-            </div>
+        let i = 0;
+        let www = dialogs.map( item =>
+          <div className="article" onClick={send} id={i++}>
+              {item.name}
+          </div>
         );
         return (
             <div>
                 {www}
+                <SendMess />
             </div>
         );
     }
