@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 
-import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
+// import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 
 class Article extends Component {
     render() {
+      // debugger;
         let textMenu = this.props.textMenu;
-
         let newPostEl = React.createRef();
-
         let send = () => {
-          this.props.dispatch(addMenuItem());
+          this.props.addMenuItem();
         }
-
         let onChanged = () => {
           let text = newPostEl.current.value;
-          this.props.dispatch(refreshText(text));
+          this.props.refreshText(text);
         }
-
         return (
             <div>
                 <h1>Article!</h1>
