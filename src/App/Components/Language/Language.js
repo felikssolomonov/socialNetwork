@@ -3,14 +3,13 @@ import React, { Component } from "react";
 
 class Language extends Component {
     render() {
-        let state = this.props.menu;
-        let textMenu = state.textMenu;
+        let textMenu = this.props.textMenu;
         let send = () => {
           this.props.addMenuItem();
         }
         let onChanged = (e) => {
-          let body = e.target.value;
-          this.props.refreshText(body);
+          let text = e.target.value;
+          this.props.refreshText(text);
         }
         return (
             <div>

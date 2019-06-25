@@ -16,13 +16,18 @@ let initialState = {
 
 const menuReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ADD_MENU_ITEM:
-			state.items.push({link: state.textMenu+"link", name: state.textMenu},);
-			state.textMenu = "";
-			return state;
-		case REFRESH_TEXT:
-			state.textMenu = action.textMenu;
-			return state;
+		case ADD_MENU_ITEM: {
+			let stateCopy = {...state};
+			stateCopy.items = [...state.items];
+			stateCopy.items.push({link: state.textMenu+"link", name: state.textMenu},);
+			stateCopy.textMenu = "";
+			return stateCopy;
+		}
+		case REFRESH_TEXT: {
+			let stateCopy = {...state};
+			stateCopy.textMenu = action.textMenu;
+			return stateCopy;
+		}
 		default:
 			return state;
 	}

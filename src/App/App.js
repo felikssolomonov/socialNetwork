@@ -15,19 +15,20 @@ import { BrowserRouter, Route, NavLink } from "react-router-dom";
 
 class App extends Component {
     render() {
+        let store = this.props.store.getState();
         return (
             <BrowserRouter>
                 <Provider store={this.props.store}>
     								<div className="bodyM">
-    										<Header menu={this.props.state.menu.items}/>
-    										<Sidebar menu={this.props.state.menu.items}/>
+    										<Header menu={store.menu.items}/>
+    										<Sidebar menu={store.menu.items}/>
     										<div className="article">
                             <Route path="/Messages" render={
-                                    () => <Dialogs dialogs={this.props.state.dialogs}/>
+                                    () => <Dialogs dialogs={store.dialogs}/>
                                 }/>
                             <Route path="/Menu" render={
                                     () => <ArticleComponent  dispatch={this.props.dispatch}
-                                                    textMenu={this.props.state.menu.textMenu}
+                                                    textMenu={store.menu.textMenu}
                                                     />
                                 }/>
                             <Route path="/Language" render={

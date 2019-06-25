@@ -5,17 +5,17 @@ import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 
 let mapStateToProps = (state) => {
   return {
-    menu: state.menu
+    textMenu: state.menu.textMenu
   }
 }
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    refreshText: () => {
-      dispatch(refreshText());
+    refreshText: (text) => {
+      dispatch(refreshText(text));
     },
-    addMenuItem: (body) => {
-      dispatch(addMenuItem(body));
+    addMenuItem: () => {
+      dispatch(addMenuItem());
     }
   }
 }

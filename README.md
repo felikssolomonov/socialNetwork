@@ -1,1 +1,3 @@
 # socialNetwork
+
+### `npm start`
