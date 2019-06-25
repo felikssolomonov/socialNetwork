@@ -8,9 +8,10 @@ let initialState = {
 		{link: "Messages", name: "Сообщения"},
 		{link: "Friends", name: "Друзья"},
 		{link: "Photos", name: "Фото"},
-		{link: "Menu", name: "Меню"}
+		{link: "Menu", name: "Меню"},
+		{link: "Language", name: "Язык"}
 	],
-	textMenu: ""
+	textMenu: "789"
 };
 
 const menuReducer = (state = initialState, action) => {
