@@ -19,7 +19,7 @@ class Dialogs extends Component {
         }
         let i = 0;
         let www = dialogs.map( item =>
-          <div className="article" onClick={send} id={i++}>
+          <div className="article" key={item.id} onClick={send} id={i++}>
               {item.name}
           </div>
         );

@@ -3,13 +3,13 @@ const REFRESH_TEXT = 'REFRESH-TEXT';
 
 let initialState = {
 	items: [
-		{link: "", name: "Главная"},
-		{link: "mypage", name: "Страница"},
-		{link: "messages", name: "Сообщения"},
-		{link: "users", name: "Люди"},
-		{link: "photos", name: "Фото"},
-		{link: "menu", name: "Меню"},
-		{link: "language", name: "Язык"}
+		{id: 1, link: "", name: "Главная"},
+		{id: 2, link: "mypage", name: "Страница"},
+		{id: 3, link: "messages", name: "Сообщения"},
+		{id: 4, link: "users", name: "Люди"},
+		{id: 5, link: "photos", name: "Фото"},
+		{id: 6, link: "menu", name: "Меню"},
+		{id: 7, link: "language", name: "Язык"}
 	],
 	textMenu: "789"
 };
@@ -19,7 +19,7 @@ const menuReducer = (state = initialState, action) => {
 		case ADD_MENU_ITEM: {
 			let stateCopy = {...state};
 			stateCopy.items = [...state.items,
-				{link: state.textMenu+"link", name: state.textMenu}
+				{id: state.items.length+1, link: state.textMenu+"link", name: state.textMenu}
 			];
 			stateCopy.textMenu = "";
 			return stateCopy;

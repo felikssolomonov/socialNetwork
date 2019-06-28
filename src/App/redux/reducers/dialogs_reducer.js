@@ -1,5 +1,6 @@
 let initialState = [
 		{
+			id: 1,
 			name: "first",
 			data: [
 					{message: "1"},
@@ -9,6 +10,7 @@ let initialState = [
 			],
 		},
 		{
+			id: 2,
 			name: "second",
 			data: [
 					{message: "111"},
@@ -18,6 +20,7 @@ let initialState = [
 			],
 		},
 		{
+			id: 3,
 			name: "three",
 			data: [
 					{message: "11111"},

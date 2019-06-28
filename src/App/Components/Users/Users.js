@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-
+import * as axios from "axios";
 
 class Users extends Component {
     render() {
         let send = () => {
-          this.props.setUsers([
-          		{id: this.props.users.length+1, foto: "https://cdn3.iconfinder.com/data/icons/people-professions/512/happy_A-512.png", followed: true, fullName: "Feliks", status: "I need work", location: { country: "Russia", city: "Moscow"} }])
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+              this.props.setUsers(response.data.items);
+            });
         }
         return (
             <div>
@@ -14,7 +16,8 @@ class Users extends Component {
                     <div className="article" key={item.id}>
                         <span>
                             <div>
-                                <img width="50px" heigth="50px" src={item.foto}/>
+                                <img width="50px" heigth="50px"
+                                    src={item.photos.small ? item.photos.small : "https://cdn3.iconfinder.com/data/icons/people-professions/512/happy_A-512.png"}/>
                             </div>
                             <div>
                                 {item.followed
@@ -27,7 +30,7 @@ class Users extends Component {
                         <span>
                             <span>
                                 <div>
-                                    {item.fullName}
+                                    {item.name}
                                 </div>
                                 <div>
                                     {item.status}
@@ -35,10 +38,10 @@ class Users extends Component {
                             </span>
                             <span>
                                 <div>
-                                    {item.location.country}
+                                    {"item.location.country"}
                                 </div>
                                 <div>
-                                    {item.location.city}
+                                    {"item.location.city"}
                                 </div>
                             </span>
                         </span>
