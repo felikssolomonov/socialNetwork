@@ -78,3 +78,7 @@
 	grid-area: navbar;
 	background-color: #00ccbd;
 }
+
+.selected {
+	font-weight: bold;
+}

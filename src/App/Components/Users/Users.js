@@ -5,26 +5,89 @@ class Users extends Component {
     // constructor(props){
     //   super(props);
     // }
+    // functionName() {
+    //   let countPage = 0;
+    //   let thisPage = 1;
+    //   let sizePage = 50;
+    //   function first(_callback, func) {
+    //     _callback(func);
+    //   }
+    //   axios.get("https://social-network.samuraijs.com/api/1.0/users")
+    //       .then(
+    //           response => {
+    //               countPage = Math.ceil(response.data.totalCount/sizePage);
+    //               let setter = this.props.setUsers;
+    //               first(
+    //                   (func) =>
+    //                   {
+    //                     while (thisPage<=countPage) {
+    //                       axios.get("https://social-network.samuraijs.com/api/1.0/users?count="+sizePage+"&page="+thisPage)
+    //                           .then(response => {
+    //                               func(response.data.items);
+    //                             });
+    //                       thisPage++;
+    //                     }
+    //                   },
+    //                   setter
+    //               );
+    //           }
+    //       );
+    // }
     componentDidMount() {
-      alert("componentDidMount");
-      axios.get("https://social-network.samuraijs.com/api/1.0/users")
-      .then(response => {
-        this.props.setUsers(response.data.items);
-      });
+        axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
+          +this.props.currentPage+
+          "&count="+this.props.pageSize)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            });
+    }
+    onPageChanged(number) {
+      this.props.setCurrentPage(number);
+      axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
+        +number+
+        "&count="+this.props.pageSize)
+          .then(response => {
+              this.props.setUsers(response.data.items);
+          });
     }
     componentDidUpdate() {
-      alert("componentDidUpdate");
+      // alert("componentDidUpdate");
     }
     render() {
         let send = () => {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-              this.props.setUsers(response.data.items);
-            });
+            // axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            // .then(response => {
+            //   this.props.setUsers(response.data.items);
+            // });
         }
+        let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+          pages.push(i);
+        }
+        // let buttons = pages.map(p=>
+        //     <div key={p}>
+        //         <span onClick={()=>{this.props.currentPage(p)}}
+        //             className={p === this.props.currentPage ? "selected" : ""}>
+        //             {p}
+        //         </span>
+        //         <p>--</p>
+        //     </div>
+        // );
         return (
             <div>
-            <button onClick={send}>Add users</button>
+                <div>
+                    {pages.map(p=>{
+                      return <span key={p}>
+                                <button onClick={()=>{this.onPageChanged(p)}}
+                                    className={p === this.props.currentPage ? "selected" : ""}>
+                                    {p+"-page..."}
+                                </button>
+                            </span>
+                    })}
+                </div>
+                <button onClick={send}>Add users</button>
                 {this.props.users.map(item =>
                     <div className="article" key={item.id}>
                         <span>
@@ -39,6 +102,7 @@ class Users extends Component {
                                   : <button onClick={()=>{this.props.follow(item.id)}}>
                                         Follow</button>}
                             </div>
+                            <p>{item.id}</p>
                         </span>
                         <span>
                             <span>
