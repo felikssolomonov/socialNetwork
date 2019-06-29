@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import React, { Component } from "react";
 import Header from './Components/Header/Header.js';
 import Sidebar from './Components/Sidebar/Sidebar.js';
@@ -8,34 +7,28 @@ import UsersComponent from './Components/Users/UsersComponent.js';
 import ProfileComponent from './Components/Profile/ProfileComponent.js';
 import Footer from './Components/Footer/Footer.js';
 import Dialogs from './Components/Dialogs/Dialogs.js';
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 // import { createBrowserHistory } from "history";
 // const customHistory = createBrowserHistory();
 
 class App extends Component {
     render() {
-        let store = this.props.store.getState();
         return (
-            <BrowserRouter>
-                <Provider store={this.props.store}>
     								<div className="bodyM">
-    										<Header menu={store.menu.items}/>
-    										<Sidebar menu={store.menu.items}/>
+    										<Header menu={this.props.state.menu.items}/>
+    										<Sidebar menu={this.props.state.menu.items}/>
     										<div className="article">
                             <Route path="" render={
-                                    () => <ProfileComponent/>
+                                    () => <p></p>
                                 }/>
                             <Route path="/messages" render={
-                                    () => <Dialogs dialogs={store.dialogs}/>
+                                    () => <Dialogs dialogs={this.props.state.dialogs}/>
                                 }/>
                             <Route path="/menu" render={
-                                    () => <ArticleComponent  dispatch={this.props.dispatch}
-                                                    textMenu={store.menu.textMenu}
-                                                    />
+                                    () => <ArticleComponent/>
                                 }/>
-                            <Route path="/profile" render={
+                            <Route path="/profile/:userId?" render={
                                     () => <ProfileComponent/>
                                 }/>
                             <Route path="/users" render={
@@ -45,8 +38,6 @@ class App extends Component {
     										<Navbar/>
     										<Footer/>
     								</div>
-                </Provider>
-						</BrowserRouter>
         );
     }
 }
