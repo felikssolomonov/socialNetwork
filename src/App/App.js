@@ -24,9 +24,6 @@ class App extends Component {
     										<Header menu={store.menu.items}/>
     										<Sidebar menu={store.menu.items}/>
     										<div className="article">
-                            <Route path="" render={
-                                    () => <UsersComponent/>
-                                }/>
                             <Route path="/messages" render={
                                     () => <Dialogs dialogs={store.dialogs}/>
                                 }/>

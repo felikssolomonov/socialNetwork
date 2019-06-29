@@ -1,70 +1,18 @@
 import React, { Component } from "react";
-import * as axios from "axios";
 
 class Users extends Component {
-    // constructor(props){
-    //   super(props);
-    // }
-    // functionName() {
-    //   let countPage = 0;
-    //   let thisPage = 1;
-    //   let sizePage = 50;
-    //   function first(_callback, func) {
-    //     _callback(func);
-    //   }
-    //   axios.get("https://social-network.samuraijs.com/api/1.0/users")
-    //       .then(
-    //           response => {
-    //               countPage = Math.ceil(response.data.totalCount/sizePage);
-    //               let setter = this.props.setUsers;
-    //               first(
-    //                   (func) =>
-    //                   {
-    //                     while (thisPage<=countPage) {
-    //                       axios.get("https://social-network.samuraijs.com/api/1.0/users?count="+sizePage+"&page="+thisPage)
-    //                           .then(response => {
-    //                               func(response.data.items);
-    //                             });
-    //                       thisPage++;
-    //                     }
-    //                   },
-    //                   setter
-    //               );
-    //           }
-    //       );
-    // }
-    componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
-          +this.props.currentPage+
-          "&count="+this.props.pageSize)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
-    }
-    onPageChanged(number) {
-      this.props.setCurrentPage(number);
-      axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
-        +number+
-        "&count="+this.props.pageSize)
-          .then(response => {
-              this.props.setUsers(response.data.items);
-          });
-    }
-    componentDidUpdate() {
-    }
     render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-          pages.push(i);
-        }
-        return (
+			let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
+			let pages = [];
+			for (let i = 1; i <= pagesCount; i++) {
+				pages.push(i);
+			}
+			return (
             <div>
                 <div>
                     {pages.map(p=>{
                       return <span key={p}>
-                                <button onClick={()=>{this.onPageChanged(p)}}
+                                <button onClick={()=>{this.props.onPageChanged(p)}}
                                     className={p === this.props.currentPage ? "selected" : ""}>
                                     {p+"-page..."}
                                 </button>
@@ -86,23 +34,17 @@ class Users extends Component {
                                   : <button onClick={()=>{this.props.follow(item.id)}}>
                                         Follow</button>}
                             </div>
-                            <p>{item.id}</p>
+                            <p>id:{item.id}</p>
                         </span>
                         <span>
                             <span>
-                                <div>
+                                <p>name:
                                     {item.name}
-                                </div>
-                                <div>
-                                    {item.status}
-                                </div>
-                            </span>
-                            <span>
-                                <div>
-                                    {"item.location.country"}
-                                </div>
-                                <div>
-                                    {"item.location.city"}
+                                </p>
+                                <div>status:
+                                    {item.status
+		                                  ? item.status
+		                                  : "status is empty!!!"}
                                 </div>
                             </span>
                         </span>
