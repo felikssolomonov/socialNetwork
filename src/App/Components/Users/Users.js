@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route, NavLink } from "react-router-dom";
 
 class Users extends Component {
     render() {
@@ -23,10 +24,10 @@ class Users extends Component {
                     {this.props.users.map(item =>
                     <div className="article" key={item.id}>
                         <span>
-                            <div>
+                            <NavLink to={"/profile/"+item.id}>
                                 <img width="50px" heigth="50px"
                                     src={item.photos.small ? item.photos.small : "https://cdn3.iconfinder.com/data/icons/people-professions/512/happy_A-512.png"}/>
-                            </div>
+                            </NavLink>
                             <div>
                                 {item.followed
                                   ? <button onClick={()=>{this.props.unfollow(item.id)}}>

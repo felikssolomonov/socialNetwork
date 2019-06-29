@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, NavLink } from "react-router-dom";
 
 class Menu extends Component {
     render() {
         let path = "/" + this.props.link;
         return (
             <div>
-                <Link to={path} className="menu">
+                <NavLink to={path} className="menu">
                     <p>
                         {this.props.name}
                     </p>
-                </Link>
+                </NavLink>
             </div>
         );
     }

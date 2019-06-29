@@ -5,7 +5,7 @@ import Sidebar from './Components/Sidebar/Sidebar.js';
 import Navbar from './Components/Navbar/Navbar.js';
 import ArticleComponent from './Components/Article/ArticleComponent.js';
 import UsersComponent from './Components/Users/UsersComponent.js';
-import LanguageComponent from './Components/Language/LanguageComponent.js';
+import ProfileComponent from './Components/Profile/ProfileComponent.js';
 import Footer from './Components/Footer/Footer.js';
 import Dialogs from './Components/Dialogs/Dialogs.js';
 import { Provider } from "react-redux";
@@ -24,6 +24,9 @@ class App extends Component {
     										<Header menu={store.menu.items}/>
     										<Sidebar menu={store.menu.items}/>
     										<div className="article">
+                            <Route path="" render={
+                                    () => <ProfileComponent/>
+                                }/>
                             <Route path="/messages" render={
                                     () => <Dialogs dialogs={store.dialogs}/>
                                 }/>
@@ -32,8 +35,8 @@ class App extends Component {
                                                     textMenu={store.menu.textMenu}
                                                     />
                                 }/>
-                            <Route path="/language" render={
-                                    () => <LanguageComponent/>
+                            <Route path="/profile" render={
+                                    () => <ProfileComponent/>
                                 }/>
                             <Route path="/users" render={
                                     () => <UsersComponent/>

@@ -4,14 +4,13 @@ const REFRESH_TEXT = 'REFRESH-TEXT';
 let initialState = {
 	items: [
 		{id: 1, link: "", name: "Главная"},
-		{id: 2, link: "mypage", name: "Страница"},
+		{id: 2, link: "profile", name: "Профиль"},
 		{id: 3, link: "messages", name: "Сообщения"},
 		{id: 4, link: "users", name: "Люди"},
 		{id: 5, link: "photos", name: "Фото"},
-		{id: 6, link: "menu", name: "Меню"},
-		{id: 7, link: "language", name: "Язык"}
+		{id: 6, link: "menu", name: "Меню"}
 	],
-	textMenu: "789"
+	textMenu: "Enter name for a new menu item"
 };
 
 const menuReducer = (state = initialState, action) => {
