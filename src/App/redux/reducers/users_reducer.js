@@ -47,10 +47,6 @@ const usersReducer = (state = initialState, action) => {
 			}
 		}
 		case SET_USERS: {
-			let length = state.users.length+1;
-			action.users.map(item => {
-				item.id = length++
-			})
 			return {
 				...state,
 				users: action.users

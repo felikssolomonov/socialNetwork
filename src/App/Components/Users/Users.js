@@ -52,29 +52,13 @@ class Users extends Component {
           });
     }
     componentDidUpdate() {
-      // alert("componentDidUpdate");
     }
     render() {
-        let send = () => {
-            // axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            // .then(response => {
-            //   this.props.setUsers(response.data.items);
-            // });
-        }
         let pagesCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
           pages.push(i);
         }
-        // let buttons = pages.map(p=>
-        //     <div key={p}>
-        //         <span onClick={()=>{this.props.currentPage(p)}}
-        //             className={p === this.props.currentPage ? "selected" : ""}>
-        //             {p}
-        //         </span>
-        //         <p>--</p>
-        //     </div>
-        // );
         return (
             <div>
                 <div>
@@ -87,8 +71,8 @@ class Users extends Component {
                             </span>
                     })}
                 </div>
-                <button onClick={send}>Add users</button>
-                {this.props.users.map(item =>
+                <div>
+                    {this.props.users.map(item =>
                     <div className="article" key={item.id}>
                         <span>
                             <div>
@@ -123,6 +107,7 @@ class Users extends Component {
                             </span>
                         </span>
                     </div>)}
+                </div>
             </div>
         );
     }
