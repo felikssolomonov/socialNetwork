@@ -9,7 +9,9 @@ import {withRouter} from "react-router-dom";
 let mapStateToProps = (state) => {
   return {
     profile: state.profile.profile,
-    textMenu: state.profile.textMenu
+    textMenu: state.profile.textMenu,
+    isAuth: state.auth.isAuth,
+    authUserId: state.auth.userId
   }
 }
 
@@ -20,14 +22,20 @@ let mapDispatchToProps = {
 
 class ProfileContainer extends Component {
     componentDidMount() {
-      let userId = this.props.match.params.userId;
-      if (!userId) {
-        userId = 1200;
-      }
-      axios.get("https://social-network.samuraijs.com/api/1.0/profile/"+userId)
+      let f = () => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/profile/"+userId)
           .then(response => {
               this.props.setUserProfile(response.data);
           });
+      }
+      let userId = this.props.match.params.userId;
+      if (userId) {
+        f();
+      }
+      else if (this.props.isAuth) {
+        userId = this.props.authUserId;
+        f();
+      }
     }
     render() {
         return (

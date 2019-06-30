@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from './Components/Header/Header.js';
+import HeaderContainer from './Components/Header/HeaderContainer.js';
 import Sidebar from './Components/Sidebar/Sidebar.js';
 import Navbar from './Components/Navbar/Navbar.js';
 import ArticleComponent from './Components/Article/ArticleComponent.js';
@@ -8,6 +8,7 @@ import ProfileComponent from './Components/Profile/ProfileComponent.js';
 import Footer from './Components/Footer/Footer.js';
 import Dialogs from './Components/Dialogs/Dialogs.js';
 import { Route } from "react-router-dom";
+import * as axios from "axios";
 
 // import { createBrowserHistory } from "history";
 // const customHistory = createBrowserHistory();
@@ -16,12 +17,9 @@ class App extends Component {
     render() {
         return (
     								<div className="bodyM">
-    										<Header menu={this.props.state.menu.items}/>
+    										<HeaderContainer />
     										<Sidebar menu={this.props.state.menu.items}/>
     										<div className="article">
-                            <Route path="" render={
-                                    () => <p></p>
-                                }/>
                             <Route path="/messages" render={
                                     () => <Dialogs dialogs={this.props.state.dialogs}/>
                                 }/>

@@ -15,29 +15,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//   return {
-//     follow: (userId) => {
-//       dispatch(follow(userId));
-//     },
-//     unfollow: (userId) => {
-//       dispatch(unfollow(userId));
-//     },
-//     setUsers: (users) => {
-//       dispatch(setUsers(users));
-//     },
-//     setCurrentPage: (page) => {
-//       dispatch(currentPage(page));
-//     },
-//     setTotalUsersCount: (totalCount) => {
-//       dispatch(totalUsersCount(totalCount));
-//     },
-//     setIsLoading: (loading) => {
-//       dispatch(isLoading(loading));
-//     }
-//   }
-// }
-
 let mapDispatchToProps = {
     follow,
     unfollow,
