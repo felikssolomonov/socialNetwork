@@ -15,7 +15,7 @@ export const usersAPI = {
 		return axiosInstance.get("users?page="+currentPage+"&count="+pageSize)
 												.then(response => response.data);
 	},
-	getProfileAPI(id) {
+	getProfileAPI(id = 1200) {
 		return axiosInstance.get("profile/"+id)
 												.then(response => response.data);
 	},
@@ -23,11 +23,11 @@ export const usersAPI = {
 		return axiosInstance.get("follow/"+id)
 												.then(response => response.data);
 	},
-	deleteFollowAPI(id = 1200) {
+	deleteFollowAPI(id) {
 		return axiosInstance.delete("follow/"+id)
 												.then(response => response.data);
 	},
-	postFollowAPI(id = 1200) {
+	postFollowAPI(id) {
 		return axiosInstance.post("follow/"+id)
 												.then(response => response.data);
 	}

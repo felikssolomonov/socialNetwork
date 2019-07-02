@@ -4,6 +4,7 @@ const SET_USERS = 'SET-USERS';
 const CURRENT_PAGE = 'CURRENT-PAGE';
 const TOTAL_USERS_COUNT = 'TOTAL-USERS-COUNT';
 const LOADING = 'LOADING';
+const DISABLING = 'DISABLING';
 
 let initialState = {
 	users: [
@@ -21,7 +22,8 @@ let initialState = {
 	pageSize: 10,
 	totalUsersCount: 0,
 	currentPage: 1,
-	isLoading: false
+	isLoading: false,
+	isDisabled: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -72,6 +74,16 @@ const usersReducer = (state = initialState, action) => {
 				isLoading: action.isLoading
 			}
 		}
+		case DISABLING: {
+			return {
+				...state,
+				isDisabled: action.isDisabled
+					?
+					[...state.isDisabled, action.id]
+					:
+					state.isDisabled.filter(id => id != action.id)
+			}
+		}
 		default:
 			return state;
 	}
@@ -105,6 +117,12 @@ export let totalUsersCount = (count) => ({
 export let isLoading = (isLoading) => ({
   type: LOADING,
 	isLoading: isLoading
+});
+
+export let isDisabled = (id, isDisabled) => ({
+  type: DISABLING,
+	id,
+	isDisabled
 });
 
 export default usersReducer;

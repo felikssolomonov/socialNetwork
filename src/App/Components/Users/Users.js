@@ -31,18 +31,36 @@ class Users extends Component {
                             </NavLink>
                             <div>
                                 {item.followed
-                                  ? <button onClick={()=>{
+                                  ? <button disabled={this.props.isDisabled.some(id => id === item.id)}
+                                            onClick={()=>{
+                                        this.props.setIsDisabled(item.id, true);
                                         usersAPI.deleteFollowAPI(item.id).then(response => {
-                                                if (response.resultCode === 0) {
-                                                  this.props.unfollow(item.id)
-                                                }
+                                                // if (response.resultCode === 0) {
+                                                  this.props.unfollow(item.id);
+                                                // }
+                                                this.props.setIsDisabled(item.id, false);
+                                            },
+                                            error => {
+                                                // if (response.resultCode === 0) {
+                                                  this.props.unfollow(item.id);
+                                                  this.props.setIsDisabled(item.id, false);
+                                                // }
                                             });
                                       }}>Unfollow</button>
-                                  : <button onClick={()=>{
+                                  : <button disabled={this.props.isDisabled.some(id => id === item.id)}
+                                            onClick={()=>{
+                                        this.props.setIsDisabled(item.id, true);
                                         usersAPI.postFollowAPI(item.id).then(response => {
-                                                if (response.resultCode === 0) {
-                                                  this.props.follow(item.id)
-                                                }
+                                                // if (response.resultCode === 0) {
+                                                // }
+                                                this.props.follow(item.id);
+                                                this.props.setIsDisabled(item.id, false);
+                                            },
+                                            error => {
+                                                // if (response.resultCode === 0) {
+                                                  this.props.follow(item.id);
+                                                  this.props.setIsDisabled(item.id, false);
+                                                // }
                                             });
                                       }}>Follow</button>}
                             </div>

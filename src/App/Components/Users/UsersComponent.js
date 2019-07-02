@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Users from "./Users.js";
 import Loader from "./../Loader/Loader.js";
 import {connect} from "react-redux";
-import {follow, unfollow, setUsers, currentPage, totalUsersCount, isLoading} from './../../redux/reducers/users_reducer.js'
+import {follow, unfollow, setUsers, currentPage, totalUsersCount, isLoading, isDisabled} from './../../redux/reducers/users_reducer.js';
 import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
@@ -11,7 +11,8 @@ let mapStateToProps = (state) => {
     pageSize: state.users.pageSize,
     totalUsersCount: state.users.totalUsersCount,
     currentPage: state.users.currentPage,
-    isLoading: state.users.isLoading
+    isLoading: state.users.isLoading,
+    isDisabled: state.users.isDisabled
   }
 }
 
@@ -21,7 +22,8 @@ let mapDispatchToProps = {
     setUsers,
     setCurrentPage: currentPage,
     setTotalUsersCount: totalUsersCount,
-    setIsLoading: isLoading
+    setIsLoading: isLoading,
+    setIsDisabled: isDisabled
 }
 
 class UsersContainer extends Component {
@@ -69,6 +71,8 @@ class UsersContainer extends Component {
                                 setCurrentPage={this.props.setCurrentPage}
                                 setUsers={this.props.setUsers}
                                 setIsLoading={this.props.setIsLoading}
+                                setIsDisabled={this.props.setIsDisabled}
+                                isDisabled={this.props.isDisabled}
                                 />
                   }
               </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header.js";
-import {setUserData, isLoading} from './../../redux/reducers/auth_reducer.js';
+import {setUserData} from './../../redux/reducers/auth_reducer.js';
+import {isDisabled} from './../../redux/reducers/users_reducer.js'
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {usersAPI} from "./../../API/api.js";
@@ -15,7 +16,8 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-    setUserData
+    setUserData,
+    setIsDisabled: isDisabled
 }
 
 class HeaderContainer extends Component {
@@ -24,6 +26,7 @@ class HeaderContainer extends Component {
             if (response.resultCode === 0){
               let {id, email, login} = response.data;
               this.props.setUserData(id, email, login);
+              this.props.setIsDisabled(id, true);
             }
           });
     }
