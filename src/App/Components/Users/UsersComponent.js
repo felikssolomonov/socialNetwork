@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Users from "./Users.js";
 import Loader from "./../Loader/Loader.js";
-import * as axios from "axios";
 import {connect} from "react-redux";
 import {follow, unfollow, setUsers, currentPage, totalUsersCount, isLoading} from './../../redux/reducers/users_reducer.js'
+import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
   return {
@@ -25,60 +25,23 @@ let mapDispatchToProps = {
 }
 
 class UsersContainer extends Component {
-    // constructor(props){
-    //   super(props);
-    // }
-    // functionName() {
-    //   let countPage = 0;
-    //   let thisPage = 1;
-    //   let sizePage = 50;
-    //   function first(_callback, func) {
-    //     _callback(func);
-    //   }
-    //   axios.get("https://social-network.samuraijs.com/api/1.0/users")
-    //       .then(
-    //           response => {
-    //               countPage = Math.ceil(response.data.totalCount/sizePage);
-    //               let setter = this.props.setUsers;
-    //               first(
-    //                   (func) =>
-    //                   {
-    //                     while (thisPage<=countPage) {
-    //                       axios.get("https://social-network.samuraijs.com/api/1.0/users?count="+sizePage+"&page="+thisPage)
-    //                           .then(response => {
-    //                               func(response.data.items);
-    //                             });
-    //                       thisPage++;
-    //                     }
-    //                   },
-    //                   setter
-    //               );
-    //           }
-    //       );
-    // }
     componentDidMount() {
       this.props.setIsLoading(true);
-        axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
-          +this.props.currentPage+
-          "&count="+this.props.pageSize, {withCredentials: true})
-            .then(response => {
-                this.props.setIsLoading(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
+      usersAPI.getUsersAPI(this.props.currentPage, this.props.pageSize)
+        .then(response => {
+            this.props.setIsLoading(false);
+            this.props.setUsers(response.items);
+            this.props.setTotalUsersCount(response.totalCount);
+        });
     }
     onPageChanged(number) {
       this.setIsLoading(true);
       this.setCurrentPage(number);
-      axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
-        +number+
-        "&count="+this.pageSize, {withCredentials: true})
-          .then(response => {
-              this.setIsLoading(false);
-              this.setUsers(response.data.items);
-          });
-    }
-    componentDidUpdate() {
+      usersAPI.getUsersAPI(number, this.pageSize)
+        .then(response => {
+            this.setIsLoading(false);
+            this.setUsers(response.items);
+        });
     }
     render() {
         return (
@@ -114,6 +77,5 @@ class UsersContainer extends Component {
 }
 
 const UsersComponent = connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
-
 
 export default UsersComponent;

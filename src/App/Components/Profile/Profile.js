@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as axios from "axios";
+import {usersAPI} from "./../../API/api.js";
 
 class Profile extends Component {
     render() {
@@ -27,23 +27,17 @@ class Profile extends Component {
                     <div>
                         {this.props.followed
                           ? <button onClick={()=>{
-                                axios.delete("https://social-network.samuraijs.com/api/1.0/follow/"+this.props.profile.userId,
-                                            {withCredentials: true,
-                                            headers: {"API-KEY": "65431dc9-14fc-461c-bece-5b089a12f972"}
-                                            })
+                                usersAPI.deleteFollowAPI(this.props.profile.userId)
                                     .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                        if (response.resultCode === 0) {
                                           this.props.setFollowing(false)
                                         }
                                     });
                               }}>Unfollow</button>
                           : <button onClick={()=>{
-                                axios.post("https://social-network.samuraijs.com/api/1.0/follow/"+this.props.profile.userId,
-                                            {}, {withCredentials: true,
-                                            headers: {"API-KEY": "65431dc9-14fc-461c-bece-5b089a12f972"}
-                                            })
+                                usersAPI.postFollowAPI(this.props.profile.userId)
                                     .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                        if (response.resultCode === 0) {
                                           this.props.setFollowing(true)
                                         }
                                     });

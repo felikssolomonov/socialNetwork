@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "./Header.js";
-import * as axios from "axios";
 import {setUserData, isLoading} from './../../redux/reducers/auth_reducer.js';
 import {connect} from "react-redux";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
   return {
@@ -20,11 +20,9 @@ let mapDispatchToProps = {
 
 class HeaderContainer extends Component {
     componentDidMount() {
-      axios.get("https://social-network.samuraijs.com/api/1.0/auth/me",
-          {withCredentials: true})
-          .then(response => {
-            if (response.data.resultCode === 0){
-              let {id, email, login} = response.data.data;
+      usersAPI.getAuthMeAPI().then(response => {
+            if (response.resultCode === 0){
+              let {id, email, login} = response.data;
               this.props.setUserData(id, email, login);
             }
           });

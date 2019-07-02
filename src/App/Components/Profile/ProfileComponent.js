@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Profile from "./Profile.js";
 import Loader from "./../Loader/Loader.js";
-import * as axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile, refreshText, setFollowing} from './../../redux/reducers/profile_reducer.js'
 import {withRouter} from "react-router-dom";
+import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
   return {
@@ -25,14 +25,13 @@ let mapDispatchToProps = {
 class ProfileContainer extends Component {
     componentDidMount() {
       let f = () => {
-        axios.get("https://social-network.samuraijs.com/api/1.0/profile/"+userId)
+        usersAPI.getProfileAPI(userId)
           .then(response => {
-              this.props.setUserProfile(response.data);
+              this.props.setUserProfile(response);
           });
-        axios.get("https://social-network.samuraijs.com/api/1.0/follow/"+userId,
-          {withCredentials: true})
+        usersAPI.getFollowAPI(userId)
           .then(response => {
-              this.props.setFollowing(response.data);
+              this.props.setFollowing(response);
           });
       }
       let userId = this.props.match.params.userId;
