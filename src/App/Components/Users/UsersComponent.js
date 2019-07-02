@@ -60,7 +60,7 @@ class UsersContainer extends Component {
       this.props.setIsLoading(true);
         axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
           +this.props.currentPage+
-          "&count="+this.props.pageSize)
+          "&count="+this.props.pageSize, {withCredentials: true})
             .then(response => {
                 this.props.setIsLoading(false);
                 this.props.setUsers(response.data.items);
@@ -72,7 +72,7 @@ class UsersContainer extends Component {
       this.setCurrentPage(number);
       axios.get("https://social-network.samuraijs.com/api/1.0/users?page="
         +number+
-        "&count="+this.pageSize)
+        "&count="+this.pageSize, {withCredentials: true})
           .then(response => {
               this.setIsLoading(false);
               this.setUsers(response.data.items);

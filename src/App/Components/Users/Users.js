@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
+import * as axios from "axios";
 
 class Users extends Component {
     render() {
@@ -30,10 +31,28 @@ class Users extends Component {
                             </NavLink>
                             <div>
                                 {item.followed
-                                  ? <button onClick={()=>{this.props.unfollow(item.id)}}>
-                                        Unfollow</button>
-                                  : <button onClick={()=>{this.props.follow(item.id)}}>
-                                        Follow</button>}
+                                  ? <button onClick={()=>{
+                                        axios.delete("https://social-network.samuraijs.com/api/1.0/follow/"+item.id,
+                                                    {withCredentials: true,
+                                                    headers: {"API-KEY": "65431dc9-14fc-461c-bece-5b089a12f972"}
+                                                    })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                  this.props.unfollow(item.id)
+                                                }
+                                            });
+                                      }}>Unfollow</button>
+                                  : <button onClick={()=>{
+                                        axios.post("https://social-network.samuraijs.com/api/1.0/follow/"+item.id,
+                                                    {}, {withCredentials: true,
+                                                        headers: {"API-KEY": "65431dc9-14fc-461c-bece-5b089a12f972"}
+                                                        })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                  this.props.follow(item.id)
+                                                }
+                                            });
+                                      }}>Follow</button>}
                             </div>
                             <p>id:{item.id}</p>
                         </span>

@@ -1,11 +1,13 @@
 const REFRESH_TEXT = 'REFRESH-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
+const FOLLOWED = 'FOLLOWED';
 
 let initialState = {
 	items: [
 	],
 	textMenu: "Enter name for a new menu item",
-	profile: null
+	profile: null,
+	followed: null
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -21,6 +23,12 @@ const profileReducer = (state = initialState, action) => {
 				profile: action.profile
 			}
 		}
+		case FOLLOWED: {
+			return {
+				...state,
+				followed: action.followed
+			}
+		}
 		default:
 			return state;
 	}
@@ -34,6 +42,11 @@ export let refreshText = (text) => ({
 export let setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
 	profile
+});
+
+export let setFollowing = (followed) => ({
+  type: FOLLOWED,
+	followed
 });
 
 export default profileReducer;

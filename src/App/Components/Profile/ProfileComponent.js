@@ -3,13 +3,14 @@ import Profile from "./Profile.js";
 import Loader from "./../Loader/Loader.js";
 import * as axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile, refreshText} from './../../redux/reducers/profile_reducer.js'
+import {setUserProfile, refreshText, setFollowing} from './../../redux/reducers/profile_reducer.js'
 import {withRouter} from "react-router-dom";
 
 let mapStateToProps = (state) => {
   return {
     profile: state.profile.profile,
     textMenu: state.profile.textMenu,
+    followed: state.profile.followed,
     isAuth: state.auth.isAuth,
     authUserId: state.auth.userId
   }
@@ -17,7 +18,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = {
     refreshText,
-    setUserProfile
+    setUserProfile,
+    setFollowing
 }
 
 class ProfileContainer extends Component {
@@ -26,6 +28,11 @@ class ProfileContainer extends Component {
         axios.get("https://social-network.samuraijs.com/api/1.0/profile/"+userId)
           .then(response => {
               this.props.setUserProfile(response.data);
+          });
+        axios.get("https://social-network.samuraijs.com/api/1.0/follow/"+userId,
+          {withCredentials: true})
+          .then(response => {
+              this.props.setFollowing(response.data);
           });
       }
       let userId = this.props.match.params.userId;
@@ -41,7 +48,9 @@ class ProfileContainer extends Component {
         return (
           <div>
               {this.props.profile
-                ? <Profile profile={this.props.profile}/>
+                ? <Profile  profile={this.props.profile}
+                            followed={this.props.followed}
+                            setFollowing={this.props.setFollowing}/>
                 : <Loader />}
           </div>
         );
