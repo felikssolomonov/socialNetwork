@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "./../../API/api.js";
 
 class Users extends Component {
     render() {
@@ -14,7 +13,7 @@ class Users extends Component {
                 <div>
                     {pages.map(p=>{
                       return <span key={p}>
-                                <button onClick={()=>{this.props.onPageChanged(p)}}
+                                <button onClick={()=>{this.props.getUsers(p, this.props.pageSize)}}
                                     className={p === this.props.currentPage ? "selected" : ""}>
                                     {p+"-page..."}
                                 </button>
@@ -32,36 +31,10 @@ class Users extends Component {
                             <div>
                                 {item.followed
                                   ? <button disabled={this.props.isDisabled.some(id => id === item.id)}
-                                            onClick={()=>{
-                                        this.props.setIsDisabled(item.id, true);
-                                        usersAPI.deleteFollowAPI(item.id).then(response => {
-                                                // if (response.resultCode === 0) {
-                                                  this.props.unfollow(item.id);
-                                                // }
-                                                this.props.setIsDisabled(item.id, false);
-                                            },
-                                            error => {
-                                                // if (response.resultCode === 0) {
-                                                  this.props.unfollow(item.id);
-                                                  this.props.setIsDisabled(item.id, false);
-                                                // }
-                                            });
+                                            onClick={()=>{this.props.sendUnfollow(item.id)
                                       }}>Unfollow</button>
                                   : <button disabled={this.props.isDisabled.some(id => id === item.id)}
-                                            onClick={()=>{
-                                        this.props.setIsDisabled(item.id, true);
-                                        usersAPI.postFollowAPI(item.id).then(response => {
-                                                // if (response.resultCode === 0) {
-                                                // }
-                                                this.props.follow(item.id);
-                                                this.props.setIsDisabled(item.id, false);
-                                            },
-                                            error => {
-                                                // if (response.resultCode === 0) {
-                                                  this.props.follow(item.id);
-                                                  this.props.setIsDisabled(item.id, false);
-                                                // }
-                                            });
+                                            onClick={()=>{this.props.sendFollow(item.id)
                                       }}>Follow</button>}
                             </div>
                             <p>id:{item.id}</p>

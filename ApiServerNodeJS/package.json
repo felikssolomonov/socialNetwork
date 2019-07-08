@@ -1,0 +1,15 @@
+{
+  "name": "apiservernodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Daniel <FeliksSolomonov@gmail.com> (https://github.com/felikssolomonov)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

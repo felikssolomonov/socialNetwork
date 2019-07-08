@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 class Article extends Component {
     render() {
         let textMenu = this.props.textMenu;

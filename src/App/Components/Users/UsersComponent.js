@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Users from "./Users.js";
 import Loader from "./../Loader/Loader.js";
 import {connect} from "react-redux";
-import {follow, unfollow, setUsers, currentPage, totalUsersCount, isLoading, isDisabled} from './../../redux/reducers/users_reducer.js';
-import {usersAPI} from "./../../API/api.js";
+import {follow, unfollow, setUsers, currentPage,
+  totalUsersCount, isLoading, isDisabled,
+  getUsers, sendFollow, sendUnfollow} from './../../redux/reducers/users_reducer.js';
 
 let mapStateToProps = (state) => {
   return {
@@ -23,27 +24,15 @@ let mapDispatchToProps = {
     setCurrentPage: currentPage,
     setTotalUsersCount: totalUsersCount,
     setIsLoading: isLoading,
-    setIsDisabled: isDisabled
+    setIsDisabled: isDisabled,
+    getUsers,
+    sendFollow,
+    sendUnfollow
 }
 
 class UsersContainer extends Component {
     componentDidMount() {
-      this.props.setIsLoading(true);
-      usersAPI.getUsersAPI(this.props.currentPage, this.props.pageSize)
-        .then(response => {
-            this.props.setIsLoading(false);
-            this.props.setUsers(response.items);
-            this.props.setTotalUsersCount(response.totalCount);
-        });
-    }
-    onPageChanged(number) {
-      this.setIsLoading(true);
-      this.setCurrentPage(number);
-      usersAPI.getUsersAPI(number, this.pageSize)
-        .then(response => {
-            this.setIsLoading(false);
-            this.setUsers(response.items);
-        });
+      this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     render() {
         return (
@@ -65,14 +54,16 @@ class UsersContainer extends Component {
                                 pageSize={this.props.pageSize}
                                 currentPage={this.props.currentPage}
                                 users={this.props.users}
-                                onPageChanged={this.onPageChanged}
                                 follow={this.props.follow}
                                 unfollow={this.props.unfollow}
                                 setCurrentPage={this.props.setCurrentPage}
                                 setUsers={this.props.setUsers}
+                                getUsers={this.props.getUsers}
                                 setIsLoading={this.props.setIsLoading}
                                 setIsDisabled={this.props.setIsDisabled}
                                 isDisabled={this.props.isDisabled}
+                                sendFollow={this.props.sendFollow}
+                                sendUnfollow={this.props.sendUnfollow}
                                 />
                   }
               </div>

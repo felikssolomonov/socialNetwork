@@ -1,3 +1,6 @@
+import {isDisabled} from './users_reducer.js';
+import {usersAPI} from "./../../API/api.js";
+
 const SET_USER_DATA = 'SET-USER-DATA';
 const LOADING = 'LOADING';
 
@@ -38,5 +41,17 @@ export let isLoading = (isLoading) => ({
   type: LOADING,
 	isLoading: isLoading
 });
+
+export const setUserAuth = () => {
+	return (dispatch) => {
+		usersAPI.getAuthMeAPI().then(response => {
+				if (response.resultCode === 0){
+						let {id, email, login} = response.data;
+						dispatch(setUserData(id, email, login));
+						dispatch(isDisabled(id, true));
+					}
+				});
+	}
+}
 
 export default authReducer;

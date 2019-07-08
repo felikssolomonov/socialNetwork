@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import Profile from "./Profile.js";
 import Loader from "./../Loader/Loader.js";
 import {connect} from "react-redux";
-import {setUserProfile, refreshText, setFollowing} from './../../redux/reducers/profile_reducer.js';
+import {setUserProfile, refreshText, setFollowing, setProfile} from './../../redux/reducers/profile_reducer.js';
 import {isDisabled} from './../../redux/reducers/users_reducer.js';
 import {withRouter} from "react-router-dom";
-import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
   return {
@@ -21,6 +20,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = {
     refreshText,
     setUserProfile,
+    setProfile,
     setFollowing,
     setIsDisabled: isDisabled
 }
@@ -28,14 +28,7 @@ let mapDispatchToProps = {
 class ProfileContainer extends Component {
     componentDidMount() {
       let f = () => {
-        usersAPI.getProfileAPI(userId)
-          .then(response => {
-              this.props.setUserProfile(response);
-          });
-        usersAPI.getFollowAPI(userId)
-          .then(response => {
-              this.props.setFollowing(response);
-          });
+        this.props.setProfile(userId);
       }
       let userId = this.props.match.params.userId;
       if (userId) {

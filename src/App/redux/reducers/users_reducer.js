@@ -1,3 +1,5 @@
+import {usersAPI} from "./../../API/api.js";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -7,19 +9,8 @@ const LOADING = 'LOADING';
 const DISABLING = 'DISABLING';
 
 let initialState = {
-	users: [
-		// {id: 1, photos: {small: "https://cdn.shopify.com/s/files/1/0743/4995/products/100-Emoji-Smiley-Face-Icons-1-Color-Sample01.jpg?v=1511740337", large: null},
-		// 	followed: true, name: "Feliks", status: "I need work"},
-		// {id: 2, photos: {small: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP9mnzE7xVbhY0124-082GmqUAO-fEjooPnYpG4E8WuqtfDKNz", large: null},
-		// 	followed: true, name: "Daniel", status: "I need learn"},
-		// {id: 3, photos: {small: "https://cdn3.iconfinder.com/data/icons/lightly-icons/30/652815-happy-grin-480.png", large: null},
-		// 	followed: true, name: "Alex", status: "I'm a gladiator"},
-		// {id: 4, photos: {small: "https://cdn4.iconfinder.com/data/icons/smiley-9/100/Laughing-512.png", large: null},
-		// 	followed: false, name: "John", status: "I in USA"},
-		// {id: 5, photos: {small: "https://cdn.shopify.com/s/files/1/1431/5776/products/squinty-smiling-face-emoji-rubber-stamp_1024x1024.png?v=1507158599", large: null},
-		// 	followed: false, name: "Vasya", status: "I like vodka"}
-	],
-	pageSize: 10,
+	users: [],
+	pageSize: 5,
 	totalUsersCount: 0,
 	currentPage: 1,
 	isLoading: false,
@@ -124,5 +115,54 @@ export let isDisabled = (id, isDisabled) => ({
 	id,
 	isDisabled
 });
+
+export const getUsers = (page, pageSize) => {
+	return (dispatch) => {
+		dispatch(isLoading(true));
+		dispatch(currentPage(page));
+		usersAPI.getUsersAPI(page, pageSize)
+			.then(response => {
+					dispatch(isLoading(false));
+					dispatch(setUsers(response.items));
+					dispatch(totalUsersCount(response.totalCount));
+			});
+	}
+}
+
+export const sendFollow = (id) => {
+	return (dispatch) => {
+		dispatch(isDisabled(id, true));
+		usersAPI.postFollowAPI(id).then(response => {
+						// if (response.resultCode === 0) {
+						dispatch(follow(id));
+						dispatch(isDisabled(id, false));
+						// }
+				},
+				error => {
+						// if (response.resultCode === 0) {
+						dispatch(follow(id));
+						dispatch(iDisabled(id, false));
+						// }
+				});
+	}
+}
+
+export const sendUnfollow = (id) => {
+	return (dispatch) => {
+		dispatch(isDisabled(id, true));
+		usersAPI.postFollowAPI(id).then(response => {
+						// if (response.resultCode === 0) {
+						dispatch(unfollow(id));
+						dispatch(isDisabled(id, false));
+						// }
+				},
+				error => {
+						// if (response.resultCode === 0) {
+						dispatch(unfollow(id));
+						dispatch(iDisabled(id, false));
+						// }
+				});
+	}
+}
 
 export default usersReducer;

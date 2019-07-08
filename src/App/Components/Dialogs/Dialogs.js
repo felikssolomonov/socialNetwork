@@ -7,11 +7,6 @@ class Dialogs extends Component {
         let messages = "";
         let send = () => {
           let index = event.srcElement.id;
-          // let d = dia
-          //               // .filter(card => card.name === "three")
-          //               .map(item => {
-          //                 <p>{item.name}</p>
-          //               });
           messages = dialogs[index].data.map( item =>
               item.message
           );
@@ -31,9 +26,6 @@ class Dialogs extends Component {
         );
     }
 }
-
-// <Dialog mess={item.data}/>
-// <SendMess />
 
 class SendMess extends Component {
     render() {

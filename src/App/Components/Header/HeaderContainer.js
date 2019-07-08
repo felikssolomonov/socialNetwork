@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Header from "./Header.js";
-import {setUserData} from './../../redux/reducers/auth_reducer.js';
-import {isDisabled} from './../../redux/reducers/users_reducer.js'
+import {setUserAuth} from './../../redux/reducers/auth_reducer.js';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "./../../API/api.js";
 
 let mapStateToProps = (state) => {
   return {
@@ -16,19 +14,12 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = {
-    setUserData,
-    setIsDisabled: isDisabled
+    setUserAuth
 }
 
 class HeaderContainer extends Component {
     componentDidMount() {
-      usersAPI.getAuthMeAPI().then(response => {
-            if (response.resultCode === 0){
-              let {id, email, login} = response.data;
-              this.props.setUserData(id, email, login);
-              this.props.setIsDisabled(id, true);
-            }
-          });
+      this.props.setUserAuth();
     }
     render() {
         return (

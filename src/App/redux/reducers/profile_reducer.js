@@ -1,10 +1,11 @@
+import {usersAPI} from "./../../API/api.js";
+
 const REFRESH_TEXT = 'REFRESH-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const FOLLOWED = 'FOLLOWED';
 
 let initialState = {
-	items: [
-	],
+	items: [],
 	textMenu: "Enter name for a new menu item",
 	profile: null,
 	followed: null
@@ -48,5 +49,18 @@ export let setFollowing = (followed) => ({
   type: FOLLOWED,
 	followed
 });
+
+export const setProfile = (id) => {
+	return (dispatch) => {
+		usersAPI.getProfileAPI(id)
+		  .then(response => {
+					dispatch(setUserProfile(response));
+		  });
+		usersAPI.getFollowAPI(id)
+			.then(response => {
+				 	dispatch(setFollowing(response));
+			});
+	}
+}
 
 export default profileReducer;

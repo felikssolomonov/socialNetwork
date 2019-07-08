@@ -5,6 +5,7 @@ import Navbar from './Components/Navbar/Navbar.js';
 import ArticleComponent from './Components/Article/ArticleComponent.js';
 import UsersComponent from './Components/Users/UsersComponent.js';
 import ProfileComponent from './Components/Profile/ProfileComponent.js';
+import SoundcloudComponent from './Components/Soundcloud/SoundcloudComponent.js';
 import Footer from './Components/Footer/Footer.js';
 import Dialogs from './Components/Dialogs/Dialogs.js';
 import { Route } from "react-router-dom";
@@ -31,6 +32,9 @@ class App extends Component {
                                 }/>
                             <Route path="/users" render={
                                     () => <UsersComponent/>
+                                }/>
+                            <Route path="/soundcloud" render={
+                                    () => <SoundcloudComponent/>
                                 }/>
     										</div>
     										<Navbar/>
