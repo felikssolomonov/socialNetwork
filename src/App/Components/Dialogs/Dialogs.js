@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Dialog from './../Dialogs/Dialog/Dialog.js';
+import Dialog from './Dialog/Dialog.js';
+import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 
 class Dialogs extends Component {
     render() {
@@ -43,5 +44,7 @@ class SendMess extends Component {
         );
     }
 }
+
+Dialogs = withAuthRedirect(Dialogs);
 
 export default Dialogs;

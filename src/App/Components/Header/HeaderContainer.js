@@ -3,6 +3,7 @@ import Header from "./Header.js";
 import {setUserAuth} from './../../redux/reducers/auth_reducer.js';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
+import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 
 let mapStateToProps = (state) => {
   return {
@@ -27,9 +28,11 @@ class HeaderContainer extends Component {
               <div className="login">
                   {this.props.isAuth
                     ?
-                    <NavLink to={"/profile/"+this.props.userId}>
+                    <div>
+                      <NavLink to={"/profile/"+this.props.userId}>
                         <Header {...this.props}/>
-                    </NavLink>
+                      </NavLink>
+                    </div>
                     :
                     <NavLink to="/login">
                     login

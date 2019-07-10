@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {follow, unfollow, setUsers, currentPage,
   totalUsersCount, isLoading, isDisabled,
   getUsers, sendFollow, sendUnfollow} from './../../redux/reducers/users_reducer.js';
+import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 
 let mapStateToProps = (state) => {
   return {
@@ -70,6 +71,8 @@ class UsersContainer extends Component {
           </div>);
     }
 }
+
+UsersContainer = withAuthRedirect(UsersContainer);
 
 const UsersComponent = connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
 

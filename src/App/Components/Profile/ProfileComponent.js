@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {setUserProfile, refreshText, setFollowing, setProfile} from './../../redux/reducers/profile_reducer.js';
 import {isDisabled} from './../../redux/reducers/users_reducer.js';
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 
 let mapStateToProps = (state) => {
   return {
@@ -55,6 +56,8 @@ class ProfileContainer extends Component {
 }
 
 let WR = withRouter(ProfileContainer);
+
+WR = withAuthRedirect(WR);
 
 const ProfileComponent = connect(mapStateToProps,mapDispatchToProps)(WR);
 
