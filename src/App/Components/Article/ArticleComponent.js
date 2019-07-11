@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Article from "./Article.js";
 import {addMenuItem, refreshText} from './../../redux/reducers/menu_reducer.js';
 import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
+import {compose} from "redux";
 
 class ArticleComponent extends Component {
     render() {
@@ -21,6 +22,6 @@ class ArticleComponent extends Component {
     }
 }
 
-ArticleComponent = withAuthRedirect(ArticleComponent);
+ArticleComponent = compose(withAuthRedirect)(ArticleComponent);
 
 export default ArticleComponent;

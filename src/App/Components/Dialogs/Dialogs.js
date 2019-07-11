@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Dialog from './Dialog/Dialog.js';
 import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
+import {compose} from "redux";
 
 class Dialogs extends Component {
     render() {
@@ -45,6 +46,6 @@ class SendMess extends Component {
     }
 }
 
-Dialogs = withAuthRedirect(Dialogs);
+Dialogs = compose(withAuthRedirect)(Dialogs);
 
 export default Dialogs;

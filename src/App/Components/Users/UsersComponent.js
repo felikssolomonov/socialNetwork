@@ -6,6 +6,7 @@ import {follow, unfollow, setUsers, currentPage,
   totalUsersCount, isLoading, isDisabled,
   getUsers, sendFollow, sendUnfollow} from './../../redux/reducers/users_reducer.js';
 import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -72,8 +73,9 @@ class UsersContainer extends Component {
     }
 }
 
-UsersContainer = withAuthRedirect(UsersContainer);
-
-const UsersComponent = connect(mapStateToProps,mapDispatchToProps)(UsersContainer);
+const UsersComponent = compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainer);
 
 export default UsersComponent;

@@ -4,6 +4,7 @@ import {setUserAuth} from './../../redux/reducers/auth_reducer.js';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
   return {
@@ -44,6 +45,8 @@ class HeaderContainer extends Component {
     }
 }
 
-HeaderContainer = connect(mapStateToProps,mapDispatchToProps)(HeaderContainer);
+HeaderContainer = compose(
+  connect(mapStateToProps,mapDispatchToProps)
+)(HeaderContainer);
 
 export default HeaderContainer;

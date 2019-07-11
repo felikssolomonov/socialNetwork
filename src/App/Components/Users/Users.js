@@ -22,22 +22,22 @@ class Users extends Component {
                 </div>
                 <div>
                     {this.props.users.map(item =>
-                    <div className="article" key={item.id}>
+                    <div className="article" key={item._id}>
                         <span>
-                            <NavLink to={"/profile/"+item.id}>
+                            <NavLink to={"/profile/"+item._id}>
                                 <img width="50px" heigth="50px"
                                     src={item.photos.small ? item.photos.small : "https://cdn3.iconfinder.com/data/icons/people-professions/512/happy_A-512.png"}/>
                             </NavLink>
                             <div>
                                 {item.followed
-                                  ? <button disabled={this.props.isDisabled.some(id => id === item.id)}
-                                            onClick={()=>{this.props.sendUnfollow(item.id)
+                                  ? <button disabled={this.props.isDisabled.some(id => id === item._id)}
+                                            onClick={()=>{this.props.sendUnfollow(item._id)
                                       }}>Unfollow</button>
-                                  : <button disabled={this.props.isDisabled.some(id => id === item.id)}
-                                            onClick={()=>{this.props.sendFollow(item.id)
+                                  : <button disabled={this.props.isDisabled.some(id => id === item._id)}
+                                            onClick={()=>{this.props.sendFollow(item._id)
                                       }}>Follow</button>}
                             </div>
-                            <p>id:{item.id}</p>
+                            <p>id:{item._id}</p>
                         </span>
                         <span>
                             <span>

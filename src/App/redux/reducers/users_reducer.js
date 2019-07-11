@@ -23,7 +23,7 @@ const usersReducer = (state = initialState, action) => {
 			return {
 				...state,
 				users: state.users.map(us => {
-					if(us.id === action.userId) {
+					if(us._id === action.userId) {
 						return {...us, followed: true}
 					}
 					return us;
@@ -34,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
 			return {
 				...state,
 				users: state.users.map(us => {
-					if(us.id === action.userId) {
+					if(us._id === action.userId) {
 						return {...us, followed: false}
 					}
 					return us;
@@ -150,7 +150,7 @@ export const sendFollow = (id) => {
 export const sendUnfollow = (id) => {
 	return (dispatch) => {
 		dispatch(isDisabled(id, true));
-		usersAPI.postFollowAPI(id).then(response => {
+		usersAPI.deleteFollowAPI(id).then(response => {
 						// if (response.resultCode === 0) {
 						dispatch(unfollow(id));
 						dispatch(isDisabled(id, false));
@@ -159,7 +159,7 @@ export const sendUnfollow = (id) => {
 				error => {
 						// if (response.resultCode === 0) {
 						dispatch(unfollow(id));
-						dispatch(iDisabled(id, false));
+						dispatch(isDisabled(id, false));
 						// }
 				});
 	}

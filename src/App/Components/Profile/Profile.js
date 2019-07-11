@@ -26,38 +26,38 @@ class Profile extends Component {
                               />
                     <div>
                         {this.props.followed
-                          ? <button disabled={this.props.isDisabled.some(id => id === this.props.profile.userId)}
+                          ? <button disabled={this.props.isDisabled.some(id => id === this.props.profile._id)}
                                     onClick={()=>{
-                                this.props.setIsDisabled(this.props.profile.userId, true);
-                                usersAPI.deleteFollowAPI(this.props.profile.userId)
+                                this.props.setIsDisabled(this.props.profile._id, true);
+                                usersAPI.deleteFollowAPI(this.props.profile._id)
                                     .then(response => {
                                         // if (response.resultCode === 0) {
                                           this.props.setFollowing(false)
                                         // }
-                                        this.props.setIsDisabled(this.props.profile.userId, false);
+                                        this.props.setIsDisabled(this.props.profile._id, false);
                                     },
                                     error => {
                                         // if (response.resultCode === 0) {
                                           this.props.setFollowing(false)
                                         // }
-                                        this.props.setIsDisabled(this.props.profile.userId, false);
+                                        this.props.setIsDisabled(this.props.profile._id, false);
                                     });
                               }}>Unfollow</button>
-                          : <button disabled={this.props.isDisabled.some(id => id === this.props.profile.userId)}
+                          : <button disabled={this.props.isDisabled.some(id => id === this.props.profile._id)}
                                     onClick={()=>{
-                                this.props.setIsDisabled(this.props.profile.userId, true);
-                                usersAPI.postFollowAPI(this.props.profile.userId)
+                                this.props.setIsDisabled(this.props.profile._id, true);
+                                usersAPI.postFollowAPI(this.props.profile._id)
                                     .then(response => {
                                         // if (response.resultCode === 0) {
                                           this.props.setFollowing(true)
                                         // }
-                                        this.props.setIsDisabled(this.props.profile.userId, false);
+                                        this.props.setIsDisabled(this.props.profile._id, false);
                                     },
                                     error => {
                                         // if (response.resultCode === 0) {
                                           this.props.setFollowing(true)
                                         // }
-                                        this.props.setIsDisabled(this.props.profile.userId, false);
+                                        this.props.setIsDisabled(this.props.profile._id, false);
                                     });
                               }}>Follow</button>}
                     </div>
