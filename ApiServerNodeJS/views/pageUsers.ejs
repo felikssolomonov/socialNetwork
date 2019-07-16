@@ -1,0 +1,23 @@
+<% include layout/header.ejs %>
+
+<nav>
+	<a href="/json/create">Создать</a>
+	| <a href="/json/users">Контакты</a>
+</nav>
+
+<ul>
+	<% users.forEach(function(user){ %>
+		<li>
+			<a href="/json/profile/<%=user._id%>">
+				<%= user.name %>
+			</a>
+			<br>
+			<%= user._id %>
+			<br>
+			<%= user.followed %>
+		</li>
+		<br>
+	<% }); %>
+</ul>
+
+<% include layout/footer.ejs %>

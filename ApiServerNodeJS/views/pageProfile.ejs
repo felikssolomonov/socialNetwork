@@ -1,0 +1,17 @@
+<% include layout/header.ejs %>
+
+<nav>
+	<a href="/json/create">Создать</a>
+	| <a href="/json/users">Контакты</a>
+</nav>
+
+<div>
+	<b>
+		<%= profile.fullName %>
+	</b>
+	<br>
+	<%= profile._id %>
+	<br>
+</div>
+
+<% include layout/footer.ejs %>
