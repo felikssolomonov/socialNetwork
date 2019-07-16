@@ -1,9 +1,5 @@
 <% include layout/header.ejs %>
 
-<nav>
-	<a href="/json/create">Создать</a>
-	| <a href="/json/users">Контакты</a>
-</nav>
     <% if(userValue!=null){ %>
 				<div>Создан новый пользователь под именем <%= userValue.first %>  <%= userValue.last %> </div>
 		<%}%>
