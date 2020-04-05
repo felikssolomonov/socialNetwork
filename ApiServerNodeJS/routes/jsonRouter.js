@@ -9,5 +9,7 @@ jsonRouter.use("/follow", followRouterJson);
 followRouterJson.get("/:id", jsonController.getFollow);
 followRouterJson.post("/:id", jsonController.postFollow);
 followRouterJson.delete("/:id", jsonController.deleteFollow);
+jsonRouter.get("/create", jsonController.create);
+jsonRouter.post("/create/profile", jsonController.postCreate);
 
 module.exports = jsonRouter;

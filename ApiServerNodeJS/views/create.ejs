@@ -3,16 +3,25 @@
     <form name="form1" method="POST" action="/json/create/profile">
     <table>
         <tr>
-        <td>First name</td>
-        <td><input type="text" name="fname" ></td>
+          <td>ID</td>
+          <td><input type="text" name="id" ></td>
         </tr>
         <tr>
-        <td>last name</td>
-        <td><input type="text" name="lname" ></td>
+          <td>Name</td>
+          <td><input type="text" name="name" ></td>
         </tr>
         <tr>
-        <td colspan="2"><input type="submit" value="Save" ></td>
+          <td>Status</td>
+          <td><input type="text" name="status" ></td>
+        </tr>
+        <tr>
+          <td>Followed</td>
+          <td><input disabled type="text" name="followed" ></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input type="submit" value="Save" ></td>
         </tr>
     </table>
     </form>
+
 <% include layout/footer.ejs %>

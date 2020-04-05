@@ -3,12 +3,14 @@ import {usersAPI} from "./../../API/api.js";
 const REFRESH_TEXT = 'REFRESH-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const FOLLOWED = 'FOLLOWED';
+const STATUS = 'STATUS';
 
 let initialState = {
 	items: [],
 	textMenu: "Enter name for a new menu item",
 	profile: null,
-	followed: null
+	followed: null,
+	status: ""
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -28,6 +30,12 @@ const profileReducer = (state = initialState, action) => {
 			return {
 				...state,
 				followed: action.followed
+			}
+		}
+		case STATUS: {
+			return {
+				...state,
+				status: action.status
 			}
 		}
 		default:
@@ -50,6 +58,11 @@ export let setFollowing = (followed) => ({
 	followed
 });
 
+export let setStatus = (status) => ({
+  type: STATUS,
+	status
+});
+
 export const setProfile = (id) => {
 	return (dispatch) => {
 		usersAPI.getProfileAPI(id)
@@ -60,6 +73,10 @@ export const setProfile = (id) => {
 			.then(response => {
 				 	dispatch(setFollowing(response));
 			});
+		usersAPI.getUserById(id)
+			.then(response => {
+					dispatch(setStatus(response));
+			})
 	}
 }
 

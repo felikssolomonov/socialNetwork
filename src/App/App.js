@@ -8,8 +8,8 @@ import ProfileComponent from './Components/Profile/ProfileComponent.js';
 import LoginComponent from './Components/Login/LoginComponent.js';
 import SoundcloudComponent from './Components/Soundcloud/SoundcloudComponent.js';
 import Footer from './Components/Footer/Footer.js';
-import Dialogs from './Components/Dialogs/Dialogs.js';
-import { Route } from "react-router-dom";
+import DialogComponent from './Components/Dialog/DialogComponent.js';
+import {Route} from "react-router-dom";
 import * as axios from "axios";
 
 // import { createBrowserHistory } from "history";
@@ -23,7 +23,7 @@ class App extends Component {
     										<Sidebar menu={this.props.state.menu.items}/>
     										<div className="article">
                             <Route path="/messages" render={
-                                    () => <Dialogs dialogs={this.props.state.dialogs}/>
+                                    () => <DialogComponent/>
                                 }/>
                             <Route path="/menu" render={
                                     () => <ArticleComponent/>
@@ -37,6 +37,9 @@ class App extends Component {
                             <Route path="/login" render={
                                     () => <LoginComponent/>
                                 }/>
+                            <Route path="/" render={
+                                    () => <SoundcloudComponent/>
+                                }/>
     										</div>
     										<Navbar/>
     										<Footer/>
@@ -44,5 +47,6 @@ class App extends Component {
         );
     }
 }
+
 
 export default App;

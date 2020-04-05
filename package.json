@@ -13,11 +13,17 @@
   "babel": {
     "presets": [
       "@babel/preset-env",
-      "@babel/preset-react"
+      "@babel/preset-react",
+      {
+        "plugins": [
+          "@babel/plugin-proposal-class-properties"
+        ]
+      }
     ]
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
@@ -34,6 +40,8 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
+    "react-vk": "^5.0.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   }

@@ -3,12 +3,7 @@ const Schema = mongoose.Schema;
 
 const profileScheme = new Schema({
   _id: {
-    type: Number,
-    required: true,
-    minlength: 2,
-    maxlength: 7,
-    min: 10,
-    max: 1000000
+    type: Number
   },
   aboutMe: {
     type: String,

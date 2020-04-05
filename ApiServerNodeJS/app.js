@@ -25,20 +25,6 @@ dataBase()
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get("/json/create", function(request, response){
-	response.header("Access-Control-Allow-Origin", "*");
-	response.render('create');
-});
-
-app.post("/json/create/profile", function(request, response){
-	response.header("Access-Control-Allow-Origin", "*");
-  var student = {
-    first: request.body.fname,
-    last: request.body.lname
-  }
-  response.render('created',{userValue : student});
-});
-
 const apiRouter = require("./routes/apiRouter.js");
 const jsonRouter = require("./routes/jsonRouter.js");
 

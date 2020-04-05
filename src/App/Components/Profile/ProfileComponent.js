@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Profile from "./Profile.js";
 import Loader from "./../Loader/Loader.js";
 import {connect} from "react-redux";
-import {setUserProfile, refreshText, setFollowing, setProfile} from './../../redux/reducers/profile_reducer.js';
+import {setUserProfile, refreshText, setFollowing, setProfile, setStatus} from './../../redux/reducers/profile_reducer.js';
 import {isDisabled} from './../../redux/reducers/users_reducer.js';
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from './../../hoc/WithAuthRedirect.js';
@@ -15,7 +15,8 @@ let mapStateToProps = (state) => {
     followed: state.profile.followed,
     isAuth: state.auth.isAuth,
     authUserId: state.auth.userId,
-    isDisabled: state.users.isDisabled
+    isDisabled: state.users.isDisabled,
+    status: state.profile.status
   }
 }
 
@@ -24,7 +25,8 @@ let mapDispatchToProps = {
     setUserProfile,
     setProfile,
     setFollowing,
-    setIsDisabled: isDisabled
+    setIsDisabled: isDisabled,
+    setStatus
 }
 
 class ProfileContainer extends Component {
@@ -49,7 +51,10 @@ class ProfileContainer extends Component {
                             followed={this.props.followed}
                             setFollowing={this.props.setFollowing}
                             isDisabled={this.props.isDisabled}
-                            setIsDisabled={this.props.setIsDisabled}/>
+                            setIsDisabled={this.props.setIsDisabled}
+                            status={this.props.status}
+                            setStatus={this.props.setStatus}
+                            />
                 : <Loader />}
           </div>
         );

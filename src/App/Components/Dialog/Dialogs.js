@@ -5,21 +5,6 @@ import {compose} from "redux";
 
 class Dialogs extends Component {
     render() {
-        let dialogs = this.props.dialogs;
-        let messages = "";
-        let send = () => {
-          let index = event.srcElement.id;
-          messages = dialogs[index].data.map( item =>
-              item.message
-          );
-          alert(messages);
-        }
-        let i = 0;
-        let www = dialogs.map( item =>
-          <div className="article" key={item.id} onClick={send} id={i++}>
-              {item.name}
-          </div>
-        );
         return (
             <div>
                 {www}

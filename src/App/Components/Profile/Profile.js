@@ -2,6 +2,20 @@ import React, { Component } from "react";
 import {usersAPI} from "./../../API/api.js";
 
 class Profile extends Component {
+    state = {
+      editMode: false,
+      status: this.props.status ? this.props.status : "..."
+    }
+    onClickStatusActive = () => {
+      this.setState({editMode: true});
+    }
+    onClickStatusDeactive = () => {
+      this.setState({editMode: false});
+    }
+    onStatusChange = (event) => {
+      this.setState({status: event.target.value});
+      this.props.setStatus(event.target.value);
+    }
     render() {
         return (
             <div>
@@ -19,6 +33,26 @@ class Profile extends Component {
                               : "https://lcx.gwglife.com/wp-content/uploads/2018/02/Seniors-icon@2x-307x245-2127.png"}
                               />
                     </h1>
+                    {
+                      this.props.isDisabled.some(id => id === this.props.profile._id)
+                      ?
+                      <div>
+                          { !this.state.editMode
+                            ?
+                            <span onClick={this.onClickStatusActive}>
+                                Status: {this.props.status}</span>
+                            :
+                            <input  onBlur={this.onClickStatusDeactive}
+                                    autoFocus={true} type="text"
+                                    onChange={this.onStatusChange}
+                                    value={this.props.status}/>
+                          }
+                      </div>
+                      :
+                      <div>
+                        <span>Status: {this.props.status}</span>
+                      </div>
+                    }
                     <img width="250px" heigth="150px"
                         src={this.props.profile.photos.large
                               ? this.props.profile.photos.large

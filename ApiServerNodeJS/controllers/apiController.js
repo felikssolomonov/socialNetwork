@@ -1,6 +1,8 @@
 const User = require("../models/user");
 const Profile = require("../models/profile");
 const Follow = require("../models/follow");
+const Dialog = require("../models/dialog");
+const Message = require("../models/message");
 
 exports.getUsers = function(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
@@ -16,6 +18,28 @@ exports.getUsers = function(request, response){
 				}
 				response.send({items: arr, totalCount: res.length});
 			}
+		});
+};
+
+exports.putUserStatus = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	let id = request.query.id ? request.query.id : 1;
+	let status = request.query.status ? request.query.status : "status is empty!";
+	User.updateOne({_id: +id},
+        {status: status},
+        function(err, result){
+  					if(err) return console.log(err);
+  					response.send(result);
+        }
+  	);
+};
+
+exports.getUserById = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	const id = request.params["id"] ? request.params["id"] : 1200;
+	User.findById(+id, function(err, res){
+				if(err) return console.log(err);
+				response.send(res);
 		});
 };
 
@@ -77,4 +101,37 @@ exports.deleteFollow = function(request, response){
 						response.send(result);
 	      }
 	  );
+};
+
+exports.post = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	const objUser = new Follow({
+	    _id: +7000,
+	    follow: false
+	});
+	objUser.save(function(err){
+	    if(err) return console.log(err);
+	    console.log("Сохранен объект", objUser);
+	});
+  response.send(objUser);
+};
+
+exports.getDialogs = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	const id = request.params["id"] ? request.params["id"] : 1200;
+	Dialog.find({users: +id}, function(err, res){
+				if(err) return console.log(err);
+				console.log(res);
+				response.send(res);
+		});
+};
+
+exports.getMessages = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	const id = request.params["id"] ? request.params["id"] : 1200;
+	Message.find({dialogId: +id}, function(err, res){
+				if(err) return console.log(err);
+				console.log(res);
+				response.send(res);
+		});
 };

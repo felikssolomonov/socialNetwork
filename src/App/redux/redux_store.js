@@ -5,6 +5,7 @@ import usersReducer from "./reducers/users_reducer.js";
 import profileReducer from "./reducers/profile_reducer.js";
 import authReducer from "./reducers/auth_reducer.js";
 import soundcloudReducer from "./reducers/soundcloud_reducer.js";
+import registrationReducer from "./reducers/registration_reducer.js";
 import thunkMiddleware from "redux-thunk";
 
 let reducers = combineReducers({
@@ -13,7 +14,8 @@ let reducers = combineReducers({
 	users: usersReducer,
 	profile: profileReducer,
 	auth: authReducer,
-	soundcloud: soundcloudReducer
+	soundcloud: soundcloudReducer,
+	registration: registrationReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

@@ -10,15 +10,18 @@ class Users extends Component {
 			}
 			return (
             <div>
-                <div>
+                <div className="center">
+                  <div className="pagination">
+                    <a href="#">&laquo;</a>
                     {pages.map(p=>{
-                      return <span key={p}>
-                                <button onClick={()=>{this.props.getUsers(p, this.props.pageSize)}}
-                                    className={p === this.props.currentPage ? "selected" : ""}>
-                                    {p+"-page..."}
-                                </button>
-                            </span>
+                      return <a key={p} href="#"
+                                onClick={()=>{this.props.getUsers(p, this.props.pageSize)}}
+                                    className={p === this.props.currentPage ? "active" : ""}>
+                                    {p}
+                            </a>
                     })}
+                    <a href="#">&raquo;</a>
+                  </div>
                 </div>
                 <div>
                     {this.props.users.map(item =>
@@ -52,6 +55,19 @@ class Users extends Component {
                             </span>
                         </span>
                     </div>)}
+                </div>
+                <div className="center">
+                  <div className="pagination">
+                    <a href="#">&laquo;</a>
+                    {pages.map(p=>{
+                      return <a key={p} href="#"
+                                onClick={()=>{this.props.getUsers(p, this.props.pageSize)}}
+                                    className={p === this.props.currentPage ? "active" : ""}>
+                                    {p}
+                            </a>
+                    })}
+                    <a href="#">&raquo;</a>
+                  </div>
                 </div>
             </div>
         );

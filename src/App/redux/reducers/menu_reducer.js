@@ -9,7 +9,8 @@ let initialState = {
 		{id: 4, link: "users", name: "Люди"},
 		{id: 5, link: "photos", name: "Фото"},
 		{id: 6, link: "menu", name: "Меню"},
-		{id: 7, link: "soundcloud", name: "Музыка"}
+		{id: 7, link: "soundcloud", name: "Музыка"},
+		{id: 8, link: "login", name: "Вход"}
 	],
 	textMenu: "Enter name for a new menu item"
 };

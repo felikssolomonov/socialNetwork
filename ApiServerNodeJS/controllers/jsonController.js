@@ -39,8 +39,7 @@ exports.getFollow = function(request, response){
 
 exports.postFollow = function(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
-  console.log("post");
-	let id = request.params["id"];
+  let id = request.params["id"];
 	Follow.updateOne({_id: +id}, // критерий выборки
 	      {follow: true}, // параметр обновления
 	      function(err, result){
@@ -61,7 +60,6 @@ exports.deleteFollow = function(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  console.log("delete");
 	let id = request.params["id"];
 	Follow.updateOne({_id: +id},
 	      {follow: false},
@@ -77,4 +75,32 @@ exports.deleteFollow = function(request, response){
 						response.render('pageFollows', {follow: result.follow});
 	      }
 	  );
+};
+
+exports.create = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	response.render('create');
+};
+
+exports.postCreate = function(request, response){
+	response.header("Access-Control-Allow-Origin", "*");
+	const objUser = new User({
+	    _id: request.body.id,
+	    name: request.body.name,
+	    status: request.body.status,
+	    followed: request.body.followed
+	});
+	objUser.save(function(err){
+	    if(err) return console.log(err);
+	    console.log("Сохранен объект", objUser);
+	});
+	const objProfile = new Profile({
+	    _id: request.body.id,
+	    fullName: request.body.name
+	});
+	objProfile.save(function(err){
+	    if(err) return console.log(err);
+	    console.log("Сохранен объект", objProfile);
+	});
+  response.render('created',{userValue : objUser});
 };

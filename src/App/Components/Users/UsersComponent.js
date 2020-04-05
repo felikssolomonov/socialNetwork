@@ -40,16 +40,6 @@ class UsersContainer extends Component {
         return (
           <div>
               <div>
-                  <button onClick={()=>{this.props.setIsLoading(true)}}
-                      className={this.props.isLoading ? "selected" : ""}>
-                      {"true"}
-                  </button>
-                  <button onClick={()=>{this.props.setIsLoading(false)}}
-                      className={this.props.isLoading ? "" : "selected"}>
-                      {"false"}
-                  </button>
-              </div>
-              <div>
                   {this.props.isLoading
                       ? <Loader/>
                       : <Users  totalUsersCount={this.props.totalUsersCount}

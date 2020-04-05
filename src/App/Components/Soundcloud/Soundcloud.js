@@ -5,9 +5,7 @@ class Soundcloud extends Component {
         return (
             <div>
             {
-              this.props.tracks.map((track, key) => {
-                return <div key={key}>{track.title}</div>;
-              })
+              this.props.tracks
             }
             </div>
         );

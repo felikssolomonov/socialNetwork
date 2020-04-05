@@ -1,6 +1,30 @@
 <% include layout/header.ejs %>
 
     <% if(userValue!=null){ %>
-				<div>Создан новый пользователь под именем <%= userValue.first %>  <%= userValue.last %> </div>
+      <div>
+				<p>Создан новый пользователь</p>
+        <table>
+            <tr>
+              <td>ID</td>
+              <td><%= userValue._id %></td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td><%= userValue.name %></td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td><%= userValue.status %></td>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td><%= userValue.date %></td>
+            </tr>
+            <tr>
+              <td>Followed</td>
+              <td><%= userValue.followed %></td>
+            </tr>
+        </table>
+      </div>
 		<%}%>
 <% include layout/footer.ejs %>

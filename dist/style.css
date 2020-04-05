@@ -70,6 +70,7 @@
 	grid-area: article;
 	background-color: #57d1ba;
 	border-radius: 10px;
+	margin-bottom: 5px;
 }
 .sidebar {
 	grid-area: sidebar;
@@ -82,4 +83,82 @@
 
 .selected {
 	font-weight: bold;
+}
+
+
+/* ////////////////////////////////////////////////// */
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 2px solid #4CAF50;
+  margin: 0 4px;
+	border-radius: 5px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+	border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {background-color: #00cc95;}
+
+/* //////////////////////////////////////////////////////// */
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+	width: 80%;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+	float: right;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
 }

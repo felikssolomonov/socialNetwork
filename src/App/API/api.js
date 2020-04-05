@@ -20,13 +20,29 @@ export const usersAPI = {
 										+currentPage+"&count="+pageSize)
 					.then(response => response.data);
 	},
+	getUserById(id) {
+		return axios.get("http://localhost:3001/api/users/"+id)
+					.then(response => response.data);
+	},
+	getDialogs(id) {
+		return axios.get("http://localhost:3001/api/dialogs/"+id)
+					.then(response => response.data);
+	},
+	getMessages(id) {
+		return axios.get("http://localhost:3001/api/messages/"+id)
+					.then(response => response.data);
+	},
+	putUserStatus(id, status) {
+		return axios.put("http://localhost:3001/api/users", {status: status})
+					.then(response => response.data);
+	},
 	// getProfileAPI(id = 1200) {
 	// 	return axiosInstance.get("profile/"+id)
 	// 											.then(response => response.data);
 	// },
 	getProfileAPI(id = 1200) {
 		return axios.get("http://localhost:3001/api/profile/"+id)
-												.then(response => response.data);
+					.then(response => response.data);
 	},
 	// getFollowAPI(id) {
 	// 	return axiosInstance.get("follow/"+id)
